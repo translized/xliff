@@ -157,9 +157,8 @@
   ],
   "author": "adrai",
   "license": "MIT",
-  "homepage": "http://locize.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/locize/xliff.git"
+    "url": "git+https://github.com/translized/xliff.git"
   }
 }
