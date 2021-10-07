@@ -2,7 +2,6 @@
   "name": "xliff",
   "version": "5.7.0",
   "description": "xliff2js and js2xliff converter xliff utils",
-  "type": "commonjs",
   "main": "./cjs/index.js",
   "exports": {
     "./package.json": "./package.json",
@@ -117,7 +116,6 @@
       "default": "./esm/xliff12ToJs.js"
     }
   },
-  "module": "./esm/index.js",
   "dependencies": {
     "xml-js": "1.6.11"
   },
