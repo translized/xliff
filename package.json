@@ -3,6 +3,8 @@
   "version": "5.7.0",
   "description": "xliff2js and js2xliff converter xliff utils",
   "main": "./cjs/index.js",
+  "type": "module",
+  "module": "./esm/index.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
