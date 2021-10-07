@@ -189,42 +189,6 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "xliff2js", {
-  enumerable: true,
-  get: function get() {
-    return _xliff2js.default;
-  }
-});
-Object.defineProperty(exports, "xliff12ToJs", {
-  enumerable: true,
-  get: function get() {
-    return _xliff12ToJs.default;
-  }
-});
-Object.defineProperty(exports, "js2xliff", {
-  enumerable: true,
-  get: function get() {
-    return _js2xliff.default;
-  }
-});
-Object.defineProperty(exports, "jsToXliff12", {
-  enumerable: true,
-  get: function get() {
-    return _jsToXliff.default;
-  }
-});
-Object.defineProperty(exports, "targetOfjs", {
-  enumerable: true,
-  get: function get() {
-    return _targetOfjs.default;
-  }
-});
-Object.defineProperty(exports, "sourceOfjs", {
-  enumerable: true,
-  get: function get() {
-    return _sourceOfjs.default;
-  }
-});
 Object.defineProperty(exports, "createjs", {
   enumerable: true,
   get: function get() {
@@ -244,6 +208,42 @@ Object.defineProperty(exports, "createxliff12", {
   }
 });
 exports.default = void 0;
+Object.defineProperty(exports, "js2xliff", {
+  enumerable: true,
+  get: function get() {
+    return _js2xliff.default;
+  }
+});
+Object.defineProperty(exports, "jsToXliff12", {
+  enumerable: true,
+  get: function get() {
+    return _jsToXliff.default;
+  }
+});
+Object.defineProperty(exports, "sourceOfjs", {
+  enumerable: true,
+  get: function get() {
+    return _sourceOfjs.default;
+  }
+});
+Object.defineProperty(exports, "targetOfjs", {
+  enumerable: true,
+  get: function get() {
+    return _targetOfjs.default;
+  }
+});
+Object.defineProperty(exports, "xliff12ToJs", {
+  enumerable: true,
+  get: function get() {
+    return _xliff12ToJs.default;
+  }
+});
+Object.defineProperty(exports, "xliff2js", {
+  enumerable: true,
+  get: function get() {
+    return _xliff2js.default;
+  }
+});
 
 var _xliff2js = _interopRequireDefault(require("./xliff2js.js"));
 
@@ -654,6 +654,12 @@ function createTransUnitTag(key, resource, obj, options) {
     u.elements.push((0, _objectToXml.makeElement)('note', null, [(0, _objectToXml.makeText)(resource.note)]));
   }
 
+  if ('context-group' in resource) {
+    resource['context-group'].forEach(function (element) {
+      u.elements.push(element);
+    });
+  }
+
   return u;
 }
 
@@ -862,6 +868,11 @@ function createTransUnitTag(transUnit) {
       case 'target':
       case 'note':
         unit[element.name] = (0, _xmlToObject.extractValue)(element.elements, _ElementTypes.default);
+        break;
+
+      case 'context-group':
+        unit['context-group'] = unit['context-group'] || [];
+        unit['context-group'].push(element);
         break;
     }
 
@@ -3939,6 +3950,7 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],27:[function(require,module,exports){
+/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -3960,6 +3972,8 @@ if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow)
 function SafeBuffer (arg, encodingOrOffset, length) {
   return Buffer(arg, encodingOrOffset, length)
 }
+
+SafeBuffer.prototype = Object.create(Buffer.prototype)
 
 // Copy static methods from Buffer
 copyProps(Buffer, SafeBuffer)
